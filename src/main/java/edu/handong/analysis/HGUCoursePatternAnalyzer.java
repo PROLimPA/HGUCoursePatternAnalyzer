@@ -38,35 +38,46 @@ public class HGUCoursePatternAnalyzer {
 		for(Student student: students) {
 			System.out.println(student.getName());
 		}
-		
+
 		courses = initiateCourseArrayFromLines(lines);
 		System.out.println("Number of All Courses: " + numOfCourses);
 		for(Course course: courses) {
 			System.out.println(course.getCourseName());
-		}
-		
+		}		
 	}
-
 	/**
 	 * This method returns a Student array to initiate the field, students, from lines.
 	 * @param lines
 	 * @return
 	 */
 	private Student[] initiateStudentArrayFromLines(String[] lines) {
+		students = new Student[numOfStudents];
+		for(int n=0; n<numOfStudents; n++) {
+			students[n] = new Student();
+		}
 		
-		return null;
+		int i = 0;
+		for(String line : lines) {
+			Student name = new Student(line);
+			if(studentExist(students, name)) continue;
+			students[i] = new Student(line);
+			i++;
+		}
+		
+		return students;
 	}
-
 	/**
-	 * This method check if there is the same name of the second arugement in the array, students
+	 * This method check if there is the same name of the second argument in the array, students
 	 * @param students
 	 * @param student
 	 * @return boolean
 	 */
 	private boolean studentExist(Student[] students, Student student) {
-		int i = students.length;
+		for(Student name : students) {
+			if(name.getName() != null && name.getName().equals(student.getName())) 
+				return true;
+		}
 		
-
 		return false;
 	}
 	
@@ -76,10 +87,19 @@ public class HGUCoursePatternAnalyzer {
 	 * @return
 	 */
 	private Course[] initiateCourseArrayFromLines(String[] lines) {
+		courses = new Course[numOfCourses];
+		for(int n=0; n<numOfCourses; n++) {
+			courses[n] = new Course();
+		}
 		
-		// TODO: implement this method
-		
-		return null;
+		int i = 0;
+		for(String line : lines) {
+			Course name = new Course(line);
+			if(courseExist(courses, name)) continue;
+			courses[i] = new Course(line);
+			i++;
+		}
+		return courses;
 	}
 
 	/**
@@ -89,9 +109,11 @@ public class HGUCoursePatternAnalyzer {
 	 * @return boolean
 	 */
 	private boolean courseExist(Course[] courses, Course course) {
+		for(Course name : courses) {
+			if(name.getCourseName() != null && name.getCourseName().equals(course.getCourseName()))
+				return true;
+		}
 		
-		// TODO: implement this method
-
 		return false;
 	}
 
